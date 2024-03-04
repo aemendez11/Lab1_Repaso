@@ -14,12 +14,14 @@ namespace Lab5
     public partial class Form1 : Form
     {
         List<Empleado> empleados = new List<Empleado>();
+        List<Asistencia> asistencias = new List<Asistencia>();
         public Form1()
         {
             InitializeComponent();
         }
-        public void  cargar_Empleados()
+        public void cargar_Empleados()
         {
+            //cargar empleados
             string fileName = "Empleados.txt";
 
             FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
@@ -39,18 +41,74 @@ namespace Lab5
             }
             reader.Close();
 
-        }
-        public void MO
-        private void buttonleer_Click(object sender, EventArgs e)
-        {
-            //cargar empleados
-            
 
-            
-            //Mostrar la lista de empleados en el Griview
+        }
+        public void cargar_Asistencia()
+        {
+            string fileName = "Asistencia.txt";
+
+            FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            StreamReader reader = new StreamReader(stream);
+
+            while (reader.Peek() > -1)
+
+            {
+                //leer los datos de un empleado
+                Asistencia asistencia1 = new Asistencia();
+                asistencia1.NoEmpleado = Convert.ToInt16(reader.ReadLine());
+                asistencia1.HorasMes = Convert.ToInt16(reader.ReadLine());
+                asistencia1.Mes = Convert.ToInt16(reader.ReadLine());
+
+                //guardar el empleado a la lista de empleados
+                asistencias.Add(asistencia1);
+            }
+            reader.Close();
+        }
+        public void Mostrar_Asistencia()
+        {
+            dataGridViewAsistencia.DataSource = null;
+            dataGridViewAsistencia.DataSource = asistencias;
+            dataGridViewAsistencia.Refresh();
+        }
+        public void Mostrar_Empleados()
+        {
             dataGridViewEmpleado.DataSource = null;
             dataGridViewEmpleado.DataSource = empleados;
             dataGridViewEmpleado.Refresh();
+        }
+        private void buttonleer_Click(object sender, EventArgs e)
+        {
+            cargar_Empleados();
+            Mostrar_Empleados();
+            cargar_Asistencia();
+            Mostrar_Asistencia();
+
+        }
+
+        private void buttonSueldo_Click(object sender, EventArgs e)
+        {
+            List<Reporte> reportes = new List<Reporte>();
+
+            foreach (Empleado empleado in empleados)
+            {
+
+                foreach (Asistencia asistencia in asistencias)
+                {
+                    if (empleado.NoEmpleado == asistencia.NoEmpleado)
+                    {
+                        
+                        Reporte reporte = new Reporte();
+                        reporte.NombreEmpleado = empleado.Nombre;
+                        reporte.Mes = asistencia.Mes;
+                        reporte.SueldoMensual = empleado.SueldoHora * asistencia.HorasMes;
+
+                        reportes.Add(reporte);
+                    }
+                }
+            }
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = reportes;
+            dataGridView1.Refresh();
         }
     }
 }
