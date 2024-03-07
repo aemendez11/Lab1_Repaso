@@ -15,6 +15,7 @@ namespace Lab5
     {
         List<Empleado> empleados = new List<Empleado>();
         List<Asistencia> asistencias = new List<Asistencia>();
+        List<Reporte> reportes = new List<Reporte>();
         public Form1()
         {
             InitializeComponent();
@@ -78,7 +79,7 @@ namespace Lab5
         }
         private void buttonleer_Click(object sender, EventArgs e)
         {
-            cargar_Empleados();
+            //cargar_Empleados();
             Mostrar_Empleados();
             cargar_Asistencia();
             Mostrar_Asistencia();
@@ -87,16 +88,17 @@ namespace Lab5
 
         private void buttonSueldo_Click(object sender, EventArgs e)
         {
-            List<Reporte> reportes = new List<Reporte>();
-
+            sueldos();
+        }
+        private void sueldos()
+        {
             foreach (Empleado empleado in empleados)
             {
-
                 foreach (Asistencia asistencia in asistencias)
                 {
                     if (empleado.NoEmpleado == asistencia.NoEmpleado)
                     {
-                        
+
                         Reporte reporte = new Reporte();
                         reporte.NombreEmpleado = empleado.Nombre;
                         reporte.Mes = asistencia.Mes;
@@ -110,5 +112,28 @@ namespace Lab5
             dataGridView1.DataSource = reportes;
             dataGridView1.Refresh();
         }
+    private void Form1_Load(object sender, EventArgs e)
+        {
+            sueldos();
+            cargar_Empleados();
+            comboBoxEmpleados.DisplayMember = "Nombre";
+            comboBoxEmpleados.ValueMember = "NoEmpleado";
+            comboBoxEmpleados.DataSource = empleados;
+           
+            comboBoxSueldo.DisplayMember = "Mes";
+            comboBoxSueldo.ValueMember = "SueldoMensual";
+            comboBoxSueldo.DataSource = reportes;
+
+        }
+
+        private void comboBoxEmpleados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int noEmpleado = Convert.ToInt32(comboBoxEmpleados.SelectedValue);
+        
+            Empleado empleadoEncontrado = empleados.Find(c => c.NoEmpleado == noEmpleado);
+            label4.Text = empleadoEncontrado.Nombre;
+        }
+
+       
     }
 }

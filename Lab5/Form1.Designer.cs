@@ -37,6 +37,9 @@ namespace Lab5
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonSueldo = new System.Windows.Forms.Button();
+            this.comboBoxEmpleados = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAsistencia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -119,11 +122,41 @@ namespace Lab5
             this.buttonSueldo.UseVisualStyleBackColor = true;
             this.buttonSueldo.Click += new System.EventHandler(this.buttonSueldo_Click);
             // 
+            // comboBoxEmpleados
+            // 
+            this.comboBoxEmpleados.FormattingEnabled = true;
+            this.comboBoxEmpleados.Location = new System.Drawing.Point(45, 316);
+            this.comboBoxEmpleados.Name = "comboBoxEmpleados";
+            this.comboBoxEmpleados.Size = new System.Drawing.Size(243, 24);
+            this.comboBoxEmpleados.TabIndex = 8;
+            this.comboBoxEmpleados.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmpleados_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(53, 361);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(116, 24);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(42, 294);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "label4";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 450);
+            this.ClientSize = new System.Drawing.Size(1188, 485);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboBoxEmpleados);
             this.Controls.Add(this.buttonSueldo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -135,6 +168,7 @@ namespace Lab5
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmpleado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAsistencia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -153,6 +187,9 @@ namespace Lab5
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonSueldo;
+        private System.Windows.Forms.ComboBox comboBoxEmpleados;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label4;
     }
 }
 
