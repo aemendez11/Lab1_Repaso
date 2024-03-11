@@ -114,16 +114,13 @@ namespace Lab5
         }
     private void Form1_Load(object sender, EventArgs e)
         {
-            sueldos();
+            cargar_Asistencia();
             cargar_Empleados();
             comboBoxEmpleados.DisplayMember = "Nombre";
             comboBoxEmpleados.ValueMember = "NoEmpleado";
             comboBoxEmpleados.DataSource = empleados;
-           
-            comboBoxSueldo.DisplayMember = "Mes";
-            comboBoxSueldo.ValueMember = "SueldoMensual";
-            comboBoxSueldo.DataSource = reportes;
-
+            label4.Visible = false;
+            label5.Visible = false;
         }
 
         private void comboBoxEmpleados_SelectedIndexChanged(object sender, EventArgs e)
@@ -131,7 +128,13 @@ namespace Lab5
             int noEmpleado = Convert.ToInt32(comboBoxEmpleados.SelectedValue);
         
             Empleado empleadoEncontrado = empleados.Find(c => c.NoEmpleado == noEmpleado);
+            Asistencia asistenciaEncontrada = asistencias.Find(c => c.NoEmpleado == noEmpleado);
+
+            decimal sueldo = empleadoEncontrado.SueldoHora * asistenciaEncontrada.HorasMes;
+            label4.Visible = true;
+            label5.Visible =true;
             label4.Text = empleadoEncontrado.Nombre;
+            label5.Text = sueldo.ToString(); 
         }
 
        
